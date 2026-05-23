@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import PageLoader from "@/components/PageLoader";
-import ScrollProgressBar from "@/components/ScrollProgressBar";
 
 export const metadata: Metadata = {
   title: "Viosa Rayhan Pratama — Frontend Engineer",
@@ -40,7 +39,6 @@ export default function RootLayout({
       </head>
       <body>
         <PageLoader />
-        <ScrollProgressBar />
         {children}
       </body>
     </html>
