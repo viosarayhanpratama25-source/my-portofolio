@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+
 const experiences = [
   {
     date: "May 2025 – Jun 2025",
@@ -44,34 +48,102 @@ const experiences = [
   },
 ];
 
+const certificates = [
+  {
+    title: "Full-Stack Web Development",
+    issuer: "CodingStudio",
+    date: "Aug 2024",
+    image: "/img/poster.png", 
+    link: "#",
+  },
+  {
+    title: "React & Next.js Advanced Concepts",
+    issuer: "Celerates",
+    date: "Nov 2024",
+    image: "/img/poster2.png", 
+    link: "#",
+  },
+  {
+    title: "UI/UX Design for Web Applications",
+    issuer: "Kampus Merdeka",
+    date: "Oct 2024",
+    image: "/img/poster3.png", 
+    link: "#",
+  }
+];
+
 export default function Experience() {
+  const [activeTab, setActiveTab] = useState("experience");
+
   return (
     <section className="section exp-section" id="experience">
       <div className="section-container">
         <div className="section-label">Journey</div>
-        <h2 className="section-title observe">Experience &amp; Education</h2>
+        <h2 className="section-title observe">Experience &amp; Sertifikat</h2>
         <p className="section-desc observe">
-          My professional path and continuous learning journey.
+          My professional path, continuous learning journey, and achievements.
         </p>
-        <div className="timeline">
-          {experiences.map((exp, i) => (
-            <div
-              className="timeline-item observe"
-              key={exp.role}
-              style={{ transitionDelay: `${i * 100}ms` } as React.CSSProperties}
-            >
-              <div className="timeline-dot"></div>
-              <div className="timeline-date">{exp.date}</div>
-              <div className="timeline-role">{exp.role}</div>
-              <div className="timeline-company">{exp.company}</div>
-              <ul className="timeline-achievements">
-                {exp.achievements.map((a) => (
-                  <li key={a}>{a}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
+
+        <div className="tab-nav observe">
+          <button 
+            className={`tab-btn ${activeTab === "experience" ? "active" : ""}`}
+            onClick={() => setActiveTab("experience")}
+          >
+            Experience & Education
+          </button>
+          <button 
+            className={`tab-btn ${activeTab === "certificates" ? "active" : ""}`}
+            onClick={() => setActiveTab("certificates")}
+          >
+            Sertifikat
+          </button>
         </div>
+
+        {activeTab === "experience" && (
+          <div className="timeline">
+            {experiences.map((exp, i) => (
+              <div
+                className="timeline-item observe visible"
+                key={exp.role}
+                style={{ transitionDelay: `${i * 100}ms` } as React.CSSProperties}
+              >
+                <div className="timeline-dot"></div>
+                <div className="timeline-date">{exp.date}</div>
+                <div className="timeline-role">{exp.role}</div>
+                <div className="timeline-company">{exp.company}</div>
+                <ul className="timeline-achievements">
+                  {exp.achievements.map((a) => (
+                    <li key={a}>{a}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {activeTab === "certificates" && (
+          <div className="certificates-grid">
+            {certificates.map((cert, i) => (
+              <div 
+                className="certificate-card observe visible" 
+                key={cert.title}
+                style={{ transitionDelay: `${i * 100}ms` } as React.CSSProperties}
+              >
+                <div className="certificate-image-wrapper">
+                  <img src={cert.image} alt={cert.title} className="certificate-img" />
+                </div>
+                <div className="certificate-content">
+                  <div className="certificate-issuer">{cert.issuer}</div>
+                  <h3 className="certificate-title">{cert.title}</h3>
+                  <div className="certificate-date">{cert.date}</div>
+                  <a href={cert.link} className="certificate-link">
+                    View Credential
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
